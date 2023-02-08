@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Profile</title>
+
+<link href="/css/Bootstrap.css" type="text/css" rel="stylesheet">
+<link href="/css/theme.css" type="text/css" rel="stylesheet">
+<link href="/css/profilePage.css" type="text/css" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript">
+	function readOnlyProfile()
+	{
+
+			$("form#profile-form :input").each(function(){
+				
+				//Grab this input
+				var input = $(this);
+				
+				
+				if(input.prop('readonly') == false)
+				{
+					input.prop('readonly', true);
+				}
+				else
+				{
+					input.removeAttr('readonly');
+				}
+			});
+			
+			var updateBtn = $('#profileUpdateBtn');
+			
+			if(updateBtn.prop('disabled') == false)
+			{
+				updateBtn.prop("disabled", true);
+			}
+			else
+			{
+				updateBtn.prop("disabled", false);
+			}
+
+	}
+	</script>
+	
+	<script type="text/javascript">
+	function readOnlyProfileTarget()
+	{
+			$("form#profile-target-form :input").each(function(){
+				//Grab this input
+				var input = $(this);
+				
+				if(input.prop('readonly') == false)
+				{
+					input.prop('readonly', true);
+				}
+				else
+				{
+					input.removeAttr('readonly');
+				}
+			});
+			
+			var updateBtn = $('#updateTargetBtn');
+			
+			if(updateBtn.prop('disabled') == false)
+			{
+				updateBtn.prop("disabled", true);
+			}
+			else
+			{
+				updateBtn.prop("disabled", false);
+			}
+	}
+	</script>
+	
+</head>
+<body class="bg-gray-100">
+
+	<div th:replace="header.html :: header" ></div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<nav id="sidebarMenu"
+				class="col-md-3 col-lg-2 d-md-block sidebar collapse"
+				style="max-width: 150px">
+				<div class="sidebar-sticky position-sticky p-2">
+					<ul class="nav nav-pills flex-column mb-auto">
+						<li class="nav-item"><a class="nav-link"
+							href="Dashboard"> Dashboard </a></li>
+						<li class="nav-item"><a class="nav-link active" href="#">
+								Profile </a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="Exercise"> Exercise </a></li>
+						<li class="nav-item"><a class="nav-link" href="Sleep">
+								Sleep </a></li>
+						<li class="nav-item"><a class="nav-link" href="Diet">
+								Diet </a></li>
+					</ul>
+
+					<hr>
+					<ul class="nav nav-pills flex-column mb-auto">
+						<li class="nav-item"><a class="nav-link" href="signOut" >Signout</a></li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					<h1 class="h2" th:inline="text">
+						Welcome to your Profile
+						[[${user.firstName}]]
+					</h1>
+				</div>
+				
+				<div class="row d-flex p-2">
+				
+					<div id ="alertSpace">
+						
+					</div>
+				
+					<div class="col-md-6">
+						<div class="card  h-100">
+							<div class="card-header">
+								<h5 class="card-title">Personal Details</h5>
+							</div>
+							<div class="card-body">
+								<form id="profile-form" class="needs-validation" novalidate>
+									<div class="row mb-2">
+										<div class="col-4">
+											<label for="first-name-input" class="form-label">First
+												name</label> <input type="text" class="form-control"
+												id="first-name-input" name="profile-first-name"
+												autocomplete="given-name" pattern="[A-za-z]+" th:value="${user.firstName}" required readonly>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter your first name
+											</div>
+										</div>
+										<div class="col-4">
+											<label for="last-name-input" class="form-label">Last Name
+											</label> <input type="text" class="form-control"
+												id="Last-name-input" name="profile-last-name"
+												autocomplete="family-name" pattern="[A-za-z]+" th:value="${user.lastName}" required readonly>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter your last name
+											</div>
+										</div>
+										<div class="col-4">	
+											<label for="age-input" class="form-label">Age
+												</label> <input type="number" class="form-control"
+												id="age-input" name="profile-age" autocomplete="age"
+												th:value="${userPreferences.age}" required readonly>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter your age</div>
+										</div>
+									</div>
+									<hr>
+									<div>
+										<h5>Weight</h5>
+									</div>
+									<div class="row">
+										<div class="col-6">
+											<label for="st-input" class="form-label">Stone</label>
+											<input type="number" class="form-control" id="st-input" name="profile-weight-st"
+												th:value="${userPreferences.weightStone}" required readonly>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter your weight in stone</div>
+										</div>	
+										<div class="col-6">
+											<label for="lbs-input" class="form-label">Pounds</label>	
+											<input type="number" min="0" max="13" class="form-control" id="st-input" name="profile-weight-lbs"
+												th:value="${userPreferences.weightPounds}" required readonly>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter your weight in pounds (Between 0-13)</div>
+										</div>
+									</div>
+									<hr>
+									<div>
+										<h5>Height</h5>
+									</div>
+									<div class="mb-2 row">
+										<div class="col-6">
+											<label for="feet-input" class="form-label">Feet</label>
+											<input type="number" class="form-control" id="feet-input" name="profile-height-feet"
+												th:value="${userPreferences.heightFeet}" required readonly>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter your height in feet</div>
+										</div>	
+										<div class="col-6">
+											<label for="inch-input" class="form-label">Inches</label>	
+											<input type="number" min="0" max="11" class="form-control" id="inch-input" name="profile-height-inch"
+												th:value="${userPreferences.heightInches}" required readonly>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter your height in inches (Between 0-11)</div>
+										</div>
+									</div>
+									<div class="text-center">
+										<button type="button" class="btn btn-primary" onclick="readOnlyProfile();">Edit</button>
+										<button id ="profileUpdateBtn" name="profileUpdate" class="btn btn-primary" disabled>Update</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="card h-100">
+							<div class="card-header">
+								<h5 class="card-title">Your Health Goals</h5>
+							</div>
+							<div class="card-body">
+								<form id="profile-target-form" class="needs-validation my-auto" novalidate>
+									<div class="row mb-3 justify-content-center align-items-center">
+										<div class="col-6">
+											<label for="steps-target-input" class="form-label">Daily Steps Target</label> 
+											<input type="number" min="0" class="form-control" id="steps-target-input" name="profile-steps-target" pattern="\d*" th:value="${userPreferences.stepTarget}" readonly>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter a valid whole number</div>
+										</div>
+									</div>
+									<hr>
+									<div class="mt-5 row justify-content-center align-items-center">
+										<div class="col-6">
+											<label for="calorie-target-input" class="form-label">Daily Calorie Target</label>
+											<input type="number" min="0" class="form-control" id="calorie-target-input" name="profile-calorie-target" pattern="\d*" th:value="${userPreferences.calorieTarget}" readonly>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter a valid whole number</div>
+										</div>	
+									</div>
+									<hr>
+									<div class="mt-5 mb-2 row justify-content-center align-items-center">
+										<div class="col-6">
+											<label for="exercise-target-input" class="form-label">Daily Exercise Target</label>	
+											<input type="number" step="any" min="0" max="24" class="form-control" id="exercise-target-input" name="profile-exercise-target" th:value="${userPreferences.exerciseTarget}" readonly>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter a target between 0-24 hours</div>
+										</div>
+									</div>
+									<div class="text-center">
+										<button type="button" class="btn btn-primary" onclick="readOnlyProfileTarget();">Edit</button>
+										<button id = "updateTargetBtn" name ="targetGoalsUpdate" type="submit" class="btn btn-primary" disabled>Update</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</main>
+
+		</div>
+	</div>
+
+	<script src="/js/Bootstrap.js"></script>
+	<script src="/js/registerValidation.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+	$('form').submit((event) => {
+			  //prevent submit from refreshing the page
+			  event.preventDefault();
+			  //Check if the alert is already showing if so remove it 
+			  //This is mostly so the user can tell the page did something
+			  if(jQuery('.alert').length > 0)
+			  {
+				  $('.alert').remove();
+			  }
+			  
+			  //Get which form did the submit
+			  const $target = $(event.target);
+			  //Add the forms data to data
+			  var data = $target.serialize();
+			  //get the id of the form to use in the servlet
+			  const formId = $target.attr('id');
+			  //call the servlet and append the formId to the request so it can be used in servlet
+			  jQuery.post("updateProfileServlet?form=" + formId, data, showAlert);
+		});
+	
+	function showAlert(response)
+	{	
+		//Prepare the alert
+		jQuery('#alertSpace').html("<div class='alert alert-success alert-dismissible fade show' role='alert'><strong></strong> <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>");
+		//Add the response text from the servlet
+		jQuery('strong').text(response);
+		
+		//Make fields readonly again
+		var allInputs = $('input'); 
+		
+		allInputs.each(function(){
+			
+			//Grab this input
+			var input = $(this);
+			
+			
+			if(input.prop('readonly') == false)
+			{
+				input.prop('readonly', true);
+			}
+		});
+		
+		
+		//Make update buttons disabled again
+		var updateBtn = $('#profileUpdateBtn');
+			
+		if(updateBtn.prop('disabled') == false)
+		{
+			updateBtn.prop("disabled", true);
+		}
+		
+		var updateBtn = $('#updateTargetBtn');
+		
+		if(updateBtn.prop('disabled') == false)
+		{
+			updateBtn.prop("disabled", true);
+		}
+	}
+	</script>
+
+</body>
+</html>

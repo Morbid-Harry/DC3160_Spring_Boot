@@ -1,0 +1,68 @@
+@charset "ISO-8859-1";
+
+.bg-gray-100{
+	background-color: #eeeff0!important;
+}
+
+.navbar {
+	background-color: #7209b7!important;
+}
+
+.sidebar .nav-link.active{
+  font-weight: 500;
+  color: #2470dc;
+}
+
+.sidebar .nav-link.active :hover{
+  font-weight: 500;
+  color: #2470dc;
+}
+
+.sidebar .nav-link{
+  font-weight: 500;
+  color: #333;
+}
+
+.nav-pills .nav-link.active
+{
+  background-color: #7209b7;
+  color:white;
+}
+
+.nav-link:hover{
+	color:#7209b7
+}
+
+.card-body
+{
+	text-align: center;
+	height:400px;
+}
+
+.card-header
+{
+	text-align: center;
+}
+
+.sidebar-sticky{
+    top: 55px;
+}
+
+.chart-container{
+	position:relative;
+	height:100%;
+	width:100%;
+}
+
+.btn-primary{
+	color:black;
+    background-color: #eeeff0!important;
+	border-color:  #eeeff0!important;
+}
+
+.btn-primary:hover,.btn-primary:active, .btn-primary:visited
+{
+	background-color: #eeeff0!important;
+	border-color:  #eeeff0!important;
+	color:#7209b7;
+}

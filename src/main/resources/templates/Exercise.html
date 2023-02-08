@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Exercise</title>
+
+<link href="/css/Bootstrap.css" type="text/css" rel="stylesheet">
+<link href="/css/theme.css" type="text/css" rel="stylesheet">
+<link href="../css/exercisePage.css" type="text/css" rel="stylesheet">
+
+</head>
+<body class="bg-gray-100">
+
+	<div th:replace="header.html :: header" ></div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<nav id="sidebarMenu"
+				class="col-md-3 col-lg-2 d-md-block sidebar collapse"
+				style="max-width: 150px">
+				<div class="sidebar-sticky position-sticky p-2">
+					<ul class="nav nav-pills flex-column mb-auto">
+						<li class="nav-item"><a class="nav-link"
+							href="Dashboard"> Dashboard </a></li>
+						<li class="nav-item"><a class="nav-link" href="Profile">
+								Profile </a></li>
+						<li class="nav-item"><a class="nav-link  active" href="#">
+								Exercise </a></li>
+						<li class="nav-item"><a class="nav-link" href="Sleep">
+								Sleep </a></li>
+						<li class="nav-item"><a class="nav-link" href="Diet">
+								Diet </a></li>
+					</ul>
+
+					<hr>
+					<ul class="nav nav-pills flex-column mb-auto">
+						<li class="nav-item"><a class="nav-link" href="signOut" >Signout</a></li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+					<h1 class="h2" th:inline="text">
+						Welcome to your Exercise Preferences
+						[[${user.firstName}]]
+					</h1>
+				</div>
+				
+				<div class="row d-flex p-2">
+					<div class="col">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title">What exercise have you done?</h5>
+							</div>
+							<div class="card-body">
+								<form id="profile-exercise-form" class="needs-validation my-auto" action="" method="POST" novalidate>
+									<div class="row mb-3">
+										<div class="col-4">
+											<label for="exercise-type-input" class="form-label">Exercise Type</label> 
+											<select class="form-select" id="exercise-type-input" name="exercise-type-done">
+												<option selected>Walking</option>
+												<option>Running</option>
+												<option>Cycling</option>
+												<option>Swimming</option>
+												<option>Other</option>
+											</select>
+										</div>
+										<div class="col-4">
+											<label for="exercise-duration-input" class="form-label">Duration of Exercise</label>
+											<input type="number" min="0" step="any" class="form-control" id="exercise-duration-input" name="exercise-duration-hours" value=0>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter a valid number of hours e.g. 2.5</div>
+										</div>	
+										<div class="col-4">
+											<label for="exercise-date-input" class="form-label">Date Done</label>	
+											<input type="date" max="9999-12-31" class="form-control" id="exercise-date-input" name="exercise-date-done">
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter a valid date in the form dd/mm/yyyy</div>
+										</div>
+									</div>
+									<div class="text-center">
+										<button type="submit" class="btn btn-primary">Add Exercise</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row d-flex p-2">
+					<div class="col">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title">How many steps have you done?</h5>
+							</div>
+							<div class="card-body">
+								<form id="profile-exercise-step-form" class="needs-validation my-auto" action="" method="POST" novalidate>
+									<div class="row mb-3">
+										<div class="col-6">
+											<label for="exercise-step-input" class="form-label">Step Number</label>
+											<input type="number" min="0" class="form-control" id="exercise-step-input" name="exercise-step-count" pattern="\d*" value=0>
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter a valid whole number</div>
+										</div>	
+										<div class="col-6">
+											<label for="exercise-stepdate-input" class="form-label">Date Done</label>	
+											<input type="date" max="9999-12-31" class="form-control" id="exercise-stepdate-input" name="exercise-step-date">
+											<div class="valid-feedback"></div>
+											<div class="invalid-feedback">Please enter a valid date in the form dd/mm/yyyy</div>
+										</div>
+									</div>
+									<div class="text-center">
+										<button type="submit" class="btn btn-primary">Add Steps</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+	
+	<script src="/js/Bootstrap.js"></script>
+	<script src="/js/registerValidation.js" type="text/javascript"></script>
+
+</body>
+</html>
