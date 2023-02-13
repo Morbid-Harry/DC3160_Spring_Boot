@@ -13,7 +13,7 @@
 </head>
 <body class="bg-gray-100">
 	
-	<div th:replace="header.html :: header" ></div>
+	<div th:replace="~{header.html :: header}" ></div>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -61,13 +61,13 @@
 									<div class="row mb-3">
 										<div class="col-6">
 											<label for="sleep-taken-input" class="form-label">Sleep taken</label>
-											<input type="number" min="0" max="24" step="any" class="form-control" id="sleep-taken-input" name="sleep-taken-hours" value=0>
+											<input type="number" min="0" max="24" step="any" class="form-control" id="sleep-taken-input" name="sleep-taken-hours" value=0 required>
 											<div class="valid-feedback"></div>
 											<div class="invalid-feedback">Please enter a valid number</div>
 										</div>	
 										<div class="col-6">
 											<label for="sleep-date-input" class="form-label">Date of Sleep</label>	
-											<input type="date" max="9999-12-31" class="form-control" id="sleep-date-input" name="sleep-date">
+											<input type="date" max="9999-12-31" class="form-control" id="sleep-date-input" name="sleep-date" required>
 											<div class="valid-feedback"></div>
 											<div class="invalid-feedback">Please enter a valid date in the form dd/mm/yyyy</div>
 										</div>

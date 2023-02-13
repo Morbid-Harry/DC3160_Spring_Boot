@@ -1,12 +1,7 @@
 package com.dc3160.DC3160_Spring_Boot.controller;
 
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,7 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dc3160.DC3160_Spring_Boot.beans.Preference;
 import com.dc3160.DC3160_Spring_Boot.beans.User;
-import com.dc3160.DC3160_Spring_Boot.DAOs.*;
+import com.dc3160.DC3160_Spring_Boot.Service.PreferenceService;
+import com.dc3160.DC3160_Spring_Boot.Service.UserService;
 
 
 /**
@@ -28,6 +24,11 @@ import com.dc3160.DC3160_Spring_Boot.DAOs.*;
 @Controller
 @SessionAttributes({"user", "userPreferences"})
 public class loginServlet{
+	@Autowired
+	UserService userService;
+	@Autowired
+	PreferenceService preferenceService;
+	
 	
 	@ModelAttribute("user")
 	public User setSession() {
@@ -42,19 +43,12 @@ public class loginServlet{
 	@PostMapping
 	protected ModelAndView doPost(Model model, @ModelAttribute("user") User user,@ModelAttribute("userPreferences") Preference preference, @RequestParam("login-email") String email, @RequestParam("login-password") String password) {
 		
-		
-		//Dao to get the user
-		UserDAO userDAO = new UserDAO();
-		
-		
-		user = userDAO.getUserByEmailAndPassword(email, password);
+		user = userService.getUserByEmailAndPassword(email, password);
 			
 		if(user != null)
 		{
 			//Get the users preferences
-			PreferenceDAO preferenceDAO = new PreferenceDAO();
-			
-			preference = preferenceDAO.getUserPreferences(user.getUserID());
+			preference = preferenceService.getPreferenceByUser(user.getUserID());
 			
 			//Set the user from query as user session
 			model.addAttribute("user", user);

@@ -8,46 +8,51 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity(name = "sleep_table")
-public class SleepRecord {
-	
+@Entity(name = "step_table")
+public class StepRecord {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="sleep_id")
+	@Column(name="step_id")
 	private int id;
 	
 	@Column(name ="fk_user_id")
 	private int userID;
 	
-	private Double sleepHours;
+	private int stepCount;
 	
-	private Date sleepDate;
-	
+	private Date stepDate;
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Double getSleepHours() {
-		return sleepHours;
-	}
-	public void setSleepHours(Double sleepHours) {
-		this.sleepHours = sleepHours;
-	}
-	public Date getSleepDate() {
-		return sleepDate;
-	}
-	public void setSleepDate(Date sleepDate) {
-		this.sleepDate = sleepDate;
-	}
+
 	public int getUserID() {
 		return userID;
 	}
+
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-	
-	
 
+	public int getStepCount() {
+		return stepCount;
+	}
+
+	public void setStepCount(int stepCount) {
+		this.stepCount = stepCount;
+	}
+
+	public Date getStepDate() {
+		return stepDate;
+	}
+
+	public void setStepDate(Date stepDate) {
+		this.stepDate = stepDate;
+	}
+	
+	
 }

@@ -12,7 +12,7 @@
 </head>
 <body class="bg-gray-100">
 
-	<div th:replace="header.html :: header" ></div>
+	<div th:replace="~{header.html :: header}" ></div>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -56,23 +56,23 @@
 								<h5 class="card-title">What have you eaten?</h5>
 							</div>
 							<div class="card-body">
-								<form id="profile-diet-form" class="needs-validation my-auto" action="" method="POST" novalidate>
+								<form id="profile-diet-form" class="needs-validation my-auto" action="Diet" method="POST" novalidate>
 									<div class="row mb-3">
 										<div class="col-4">
 											<label for="meal-name-input" class="form-label">Meal Name</label> 
-											<input type="text" min="0" class="form-control" id="meal-name-input" name="diet-meal-name">
+											<input type="text" class="form-control" id="meal-name-input" name="diet-meal-name" required>
 											<div class="valid-feedback"></div>
 											<div class="invalid-feedback">Please enter a valid meal name</div>
 										</div>
 										<div class="col-4">
 											<label for="meal-calroies-input" class="form-label">Total Calories</label>
-											<input type="number" min="0" class="form-control" id="meal-calroies-input" name="diet-meal-calories" pattern="\d*" value=0>
+											<input type="number" min="0" class="form-control" id="meal-calroies-input" name="diet-meal-calories" pattern="\d*" value=0 required>
 											<div class="valid-feedback"></div>
 											<div class="invalid-feedback">Please enter a valid whole number</div>
 										</div>	
 										<div class="col-4">
 											<label for="meal-date-input" class="form-label">Date Eaten</label>	
-											<input type="date" max="9999-12-31" class="form-control" id="meal-date-input" name="diet-meal-date">
+											<input type="date" max="9999-12-31" class="form-control" id="meal-date-input" name="diet-meal-date" required>
 											<div class="valid-feedback"></div>
 											<div class="invalid-feedback">Please enter a valid date in the form dd/mm/yyyy</div>
 										</div>
@@ -81,6 +81,33 @@
 										<button type="submit" class="btn btn-primary">Add Meal</button>
 									</div>
 								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row d-flex p-2">
+					<div class="col">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title">Your Diet Data</h5>
+							</div>
+							<div class="card-body">
+								<table id = "dietTable" class="table">
+									<thead>
+										<tr>
+											<th>Meal Name</th>
+											<th>Calories</th>
+											<th>Date of Meal</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="record : ${dietRecords}">
+											<td th:text="${record.mealName}"></td>
+											<td th:text="${record.mealCalories}"></td>
+											<td th:text="${record.mealDate}"></td>
+										<tr>
+									</tbody>	
+								</table>
 							</div>
 						</div>
 					</div>

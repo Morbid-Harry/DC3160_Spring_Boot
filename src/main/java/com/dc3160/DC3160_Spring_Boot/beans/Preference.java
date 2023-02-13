@@ -1,11 +1,23 @@
 package com.dc3160.DC3160_Spring_Boot.beans;
 
-import java.io.Serializable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-public class Preference implements Serializable{
+@Entity(name = "preference_table")
+public class Preference{
 	
-	private int preferenceID, fkUserID, age, weightStone,weightPounds, 
-					heightFeet, heightInches, stepTarget, calorieTarget;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="preference_id")
+	private int id;
+	
+	@Column(name ="fk_user_id")
+	private int userID;
+	
+	private int age, weightStone,weightPounds, heightFeet, heightInches, stepTarget, calorieTarget;
 	
 	private double exerciseTarget;
 	
@@ -14,20 +26,20 @@ public class Preference implements Serializable{
 		
 	}
 
-	public int getPreferenceID() {
-		return preferenceID;
+	public int getId() {
+		return id;
 	}
 
-	public void setPreferenceID(int preferenceID) {
-		this.preferenceID = preferenceID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public int getFkUserID() {
-		return fkUserID;
+	public int getUserID() {
+		return userID;
 	}
 
-	public void setFkUserID(int fkUserID) {
-		this.fkUserID = fkUserID;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 	public int getAge() {

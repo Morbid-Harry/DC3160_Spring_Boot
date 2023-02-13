@@ -11,7 +11,7 @@
 </head>
 <body class="bg-gray-100">
 
-	<div th:replace="header.html :: header" ></div>
+	<div th:replace="~{header.html :: header}" ></div>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -55,11 +55,11 @@
 								<h5 class="card-title">What exercise have you done?</h5>
 							</div>
 							<div class="card-body">
-								<form id="profile-exercise-form" class="needs-validation my-auto" action="" method="POST" novalidate>
+								<form id="profile-exercise-form" class="needs-validation my-auto" action="AddExercise" method="POST" novalidate>
 									<div class="row mb-3">
 										<div class="col-4">
 											<label for="exercise-type-input" class="form-label">Exercise Type</label> 
-											<select class="form-select" id="exercise-type-input" name="exercise-type-done">
+											<select class="form-select" id="exercise-type-input" name="exercise-type-done" required>
 												<option selected>Walking</option>
 												<option>Running</option>
 												<option>Cycling</option>
@@ -69,13 +69,13 @@
 										</div>
 										<div class="col-4">
 											<label for="exercise-duration-input" class="form-label">Duration of Exercise</label>
-											<input type="number" min="0" step="any" class="form-control" id="exercise-duration-input" name="exercise-duration-hours" value=0>
+											<input type="number" min="0" step="any" class="form-control" id="exercise-duration-input" name="exercise-duration-hours" value=0 required>
 											<div class="valid-feedback"></div>
 											<div class="invalid-feedback">Please enter a valid number of hours e.g. 2.5</div>
 										</div>	
 										<div class="col-4">
 											<label for="exercise-date-input" class="form-label">Date Done</label>	
-											<input type="date" max="9999-12-31" class="form-control" id="exercise-date-input" name="exercise-date-done">
+											<input type="date" max="9999-12-31" class="form-control" id="exercise-date-input" name="exercise-date-done" required>
 											<div class="valid-feedback"></div>
 											<div class="invalid-feedback">Please enter a valid date in the form dd/mm/yyyy</div>
 										</div>
@@ -95,17 +95,17 @@
 								<h5 class="card-title">How many steps have you done?</h5>
 							</div>
 							<div class="card-body">
-								<form id="profile-exercise-step-form" class="needs-validation my-auto" action="" method="POST" novalidate>
+								<form id="profile-exercise-step-form" class="needs-validation my-auto" action="AddSteps" method="POST" novalidate>
 									<div class="row mb-3">
 										<div class="col-6">
 											<label for="exercise-step-input" class="form-label">Step Number</label>
-											<input type="number" min="0" class="form-control" id="exercise-step-input" name="exercise-step-count" pattern="\d*" value=0>
+											<input type="number" min="0" class="form-control" id="exercise-step-input" name="exercise-step-count" pattern="\d*" value=0 required>
 											<div class="valid-feedback"></div>
 											<div class="invalid-feedback">Please enter a valid whole number</div>
 										</div>	
 										<div class="col-6">
 											<label for="exercise-stepdate-input" class="form-label">Date Done</label>	
-											<input type="date" max="9999-12-31" class="form-control" id="exercise-stepdate-input" name="exercise-step-date">
+											<input type="date" max="9999-12-31" class="form-control" id="exercise-stepdate-input" name="exercise-step-date" required>
 											<div class="valid-feedback"></div>
 											<div class="invalid-feedback">Please enter a valid date in the form dd/mm/yyyy</div>
 										</div>
@@ -114,6 +114,58 @@
 										<button type="submit" class="btn btn-primary">Add Steps</button>
 									</div>
 								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row d-flex p-2">
+					<div class="col">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title">Your Exercise Data</h5>
+							</div>
+							<div class="card-body">
+								<table id = "exerciseTable" class="table">
+									<thead>
+										<tr>
+											<th>Exercise Type</th>
+											<th>Duration</th>
+											<th>Date of Exercise</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="record : ${exerciseRecords}">
+											<td th:text="${record.exerciseType}"></td>
+											<td th:text="${record.exerciseDuration}"></td>
+											<td th:text="${record.exerciseDate}"></td>
+										<tr>
+									</tbody>	
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row d-flex p-2">
+					<div class="col">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title">Your Steps Data</h5>
+							</div>
+							<div class="card-body">
+								<table id = "stepsTable" class="table">
+									<thead>
+										<tr>
+											<th>Step Count</th>
+											<th>Date of Steps</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="record : ${stepRecords}">
+											<td th:text="${record.stepCount}"></td>
+											<td th:text="${record.stepDate}"></td>
+										<tr>
+									</tbody>	
+								</table>
 							</div>
 						</div>
 					</div>
