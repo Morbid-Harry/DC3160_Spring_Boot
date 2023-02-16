@@ -34,4 +34,9 @@ public class MealService {
 		
 		return mealRepo.findByUserIDAndMealDate(userId, today);
 	}
+	
+	public List<MealRecord> getCaloriesTodaysDate(int userId, Date date)
+	{	
+		return mealRepo.findByUserIDAndMealDate(userId, date);
+	}
 }

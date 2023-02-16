@@ -174,7 +174,9 @@
 				maintainAspectRatio : false
 			}
 		});
-
+		
+		var weeklyCaloriesEaten = [[${weeklyCalories}]];
+		
 		var weeklyCalories = document.getElementById('weeklyCalories');
 
 		var curr = new Date;
@@ -218,7 +220,7 @@
 				labels : dayLabels,
 				datasets : [ {
 					label : 'Calories Eaten',
-					data : [ 2300, 1600, 1680, 1500, 1600, 1900, 2100 ],
+					data : [ weeklyCaloriesEaten[0], weeklyCaloriesEaten[1], weeklyCaloriesEaten[2], weeklyCaloriesEaten[3], weeklyCaloriesEaten[4], weeklyCaloriesEaten[5], weeklyCaloriesEaten[6] ],
 					backgroundColor : [ 'green' ]
 				} ]
 			},
@@ -226,7 +228,9 @@
 				maintainAspectRatio : false
 			}
 		});
-
+		
+		var weeklyStepsDone = [[${weeklySteps}]];
+		
 		var weeklySteps = document.getElementById('weeklySteps').getContext(
 				'2d');
 
@@ -236,7 +240,7 @@
 				labels : dayLabels,
 				datasets : [ {
 					label : 'Steps Done',
-					data : [ 5300, 3000, 5500, 2300, 7000, 6500, 1200 ],
+					data : [ weeklyStepsDone[0], weeklyStepsDone[1], weeklyStepsDone[2], weeklyStepsDone[3], weeklyStepsDone[4], weeklyStepsDone[5], weeklyStepsDone[6] ],
 					backgroundColor : [ 'green' ]
 				} ]
 			},
@@ -244,6 +248,8 @@
 				maintainAspectRatio : false
 			}
 		});
+		
+		var weeklySleepTaken = [[${weeklySleep}]];
 
 		var weeklySleep = document.getElementById('weeklySleep').getContext(
 				'2d');
@@ -254,7 +260,7 @@
 				labels : dayLabels,
 				datasets : [ {
 					label : 'Sleep in Hours',
-					data : [ 8, 6.5, 4.3, 6.7, 7.3, 7.5, 8.5 ],
+					data : [ weeklySleepTaken[0], weeklySleepTaken[1], weeklySleepTaken[2], weeklySleepTaken[3], weeklySleepTaken[4], weeklySleepTaken[5], weeklySleepTaken[6] ],
 					backgroundColor : [ 'green' ]
 				} ]
 			},

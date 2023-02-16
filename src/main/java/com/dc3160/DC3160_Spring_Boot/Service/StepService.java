@@ -32,4 +32,10 @@ public class StepService {
 		
 		return stepRepo.findByUserIDAndStepDate(userId, today);
 	}
+	
+	public List<StepRecord> getStepsTodaysDate(int userId, Date date)
+	{
+
+		return stepRepo.findByUserIDAndStepDate(userId, date);
+	}
 }

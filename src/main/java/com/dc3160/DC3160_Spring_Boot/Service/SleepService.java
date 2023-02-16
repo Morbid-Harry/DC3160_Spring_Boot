@@ -1,5 +1,6 @@
 package com.dc3160.DC3160_Spring_Boot.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,10 @@ public class SleepService {
 	public List<SleepRecord> getSleepByUser(int userId)
 	{
 		return sleepRepo.findByUserID(userId);
+	}
+	
+	public List<SleepRecord> getSleepTodaysDate(int userId, Date date)
+	{
+		return sleepRepo.findByUserIDAndSleepDate(userId, date);
 	}
 }
