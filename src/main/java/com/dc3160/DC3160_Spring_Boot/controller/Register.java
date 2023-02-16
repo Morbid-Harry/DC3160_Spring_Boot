@@ -37,21 +37,29 @@ public class Register {
 	}
 
 	@PostMapping
-	protected ModelAndView doPost(Model model, @ModelAttribute("user") User newUser,@ModelAttribute("userPreferences") Preference preference, @RequestParam("register-email") String email, @RequestParam("register-first-name") String firstName, @RequestParam("register-last-name") String lastName, @RequestParam("register-password") String password ){
+	protected ModelAndView doPost(Model model, @RequestParam("register-email") String email, @RequestParam("register-first-name") String firstName, @RequestParam("register-last-name") String lastName, @RequestParam("register-password") String password ){
 		
 		//Validation has already been handled via JS and bootstrap
+			
+			User newUser = new User();
 		
-			//Inserted user is returned to servlet to create bean and stored in session
+			//Add form data to potential new user object
 			newUser.setEmail(email);
 			newUser.setFirstName(firstName);
 			newUser.setLastName(lastName);
 			newUser.setPassword(password);
+			
+			//Check if the user does not already exist by email
 			if(userService.getUserByEmail(email) == null)
 			{
 				userService.addUser(newUser);
 				
+				User createdUser = userService.getUserByEmailAndPassword(email, password);
+				
+				Preference preference = new Preference();
+				
 				//Set up their initial default preferences
-				preference.setUserID(userService.getUserByEmail(email).getUserID());
+				preference.setUserID(createdUser.getUserID());
 				preference.setAge(18);
 				preference.setWeightStone(10);
 				preference.setWeightPounds(6);
@@ -64,11 +72,11 @@ public class Register {
 				
 				preferenceService.addPreference(preference);
 				
-				model.addAttribute("user", newUser);
+				model.addAttribute("user", createdUser);
 				model.addAttribute("userPreferences", preference);
 				
-				//Forward to dashboard
-				return new ModelAndView("dashboard.html");
+				//redirect to dashboard
+				return new ModelAndView("redirect:/Dashboard");
 			}
 			else {
 				//Error message to send back

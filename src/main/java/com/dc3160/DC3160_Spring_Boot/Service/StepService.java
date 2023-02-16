@@ -1,5 +1,6 @@
 package com.dc3160.DC3160_Spring_Boot.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,14 @@ public class StepService {
 	public List<StepRecord> getStepByUser(int userId)
 	{
 		return stepRepo.findByUserID(userId);
+	}
+	
+	public List<StepRecord> getStepsTodaysDate(int userId)
+	{
+		//Get Todays date
+		long millis = System.currentTimeMillis();
+		Date today = new java.sql.Date(millis);
+		
+		return stepRepo.findByUserIDAndStepDate(userId, today);
 	}
 }

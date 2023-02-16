@@ -131,7 +131,11 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
 		integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script>
+	<script th:inline="javascript">
+		
+		var stepsDone = "[[${stepsDone}]]";
+		var stepsLeft = "[[${stepsLeft}]]";
+	
 		var dailySteps = document.getElementById('dailySteps').getContext('2d');
 
 		var dailyStepsChart = new Chart(dailySteps, {
@@ -140,7 +144,7 @@
 				labels : [ 'Steps Done', 'Steps Remaining' ],
 				datasets : [ {
 					label : 'Steps',
-					data : [ 2000, 1000, ],
+					data : [ stepsDone, stepsLeft, ],
 					backgroundColor : [ 'blue', 'red' ]
 				} ]
 			},
@@ -148,7 +152,11 @@
 				maintainAspectRatio : false
 			}
 		});
-
+		
+		
+		var caloriesEaten = "[[${caloriesEaten}]]";
+		var caloriesLeft = "[[${caloriesLeft}]]";
+		
 		var dailyCalories = document.getElementById('dailyCalories')
 				.getContext('2d');
 
@@ -158,7 +166,7 @@
 				labels : [ 'Carlories Eaten', 'Calories Remaining' ],
 				datasets : [ {
 					label : 'Caloires',
-					data : [ 1532, 358, ],
+					data : [ caloriesEaten, caloriesLeft, ],
 					backgroundColor : [ 'blue', 'red' ]
 				} ]
 			},
@@ -209,7 +217,7 @@
 			data : {
 				labels : dayLabels,
 				datasets : [ {
-					label : 'Calories',
+					label : 'Calories Eaten',
 					data : [ 2300, 1600, 1680, 1500, 1600, 1900, 2100 ],
 					backgroundColor : [ 'green' ]
 				} ]
@@ -227,7 +235,7 @@
 			data : {
 				labels : dayLabels,
 				datasets : [ {
-					label : 'Steps',
+					label : 'Steps Done',
 					data : [ 5300, 3000, 5500, 2300, 7000, 6500, 1200 ],
 					backgroundColor : [ 'green' ]
 				} ]

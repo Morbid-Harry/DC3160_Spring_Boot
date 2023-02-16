@@ -49,13 +49,12 @@ public class loginServlet{
 		{
 			//Get the users preferences
 			preference = preferenceService.getPreferenceByUser(user.getUserID());
-			
 			//Set the user from query as user session
 			model.addAttribute("user", user);
 			model.addAttribute("userPreferences", preference);
 			
-			//Forward to dashboard
-			return new ModelAndView("dashboard.html");
+			//Redirect to dashboard
+			return new ModelAndView("redirect:/Dashboard");
 			
 		}
 		else {
